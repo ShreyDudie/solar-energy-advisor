@@ -1,0 +1,51 @@
+type User @table {
+  email: String!
+  displayName: String!
+  createdAt: Timestamp!
+  phoneNumber: String
+  address: String
+  propertyType: String
+}
+
+type Property @table {
+  user: User
+  address: String!
+  roofType: String!
+  latitude: Float!
+  longitude: Float!
+  averageMonthlyBill: Float
+  averageMonthlyKwh: Int
+  shadingDetails: String
+}
+
+type SolarSystem @table {
+  user: User
+  property: Property
+  systemSizeKw: Float!
+  estimatedCost: Float!
+  estimatedAnnualProductionKwh: Int!
+  panelBrand: String
+  inverterBrand: String
+  estimatedPaybackPeriodYears: Int
+}
+
+type Installer @table {
+  companyName: String!
+  contactEmail: String!
+  phoneNumber: String!
+  website: String
+  serviceAreas: [String]
+  licenseNumber: String
+}
+
+type Quote @table {
+  user: User
+  property: Property
+  solarSystem: SolarSystem
+  installer: Installer
+  quoteAmount: Float!
+  dateIssued: Date!
+  status: String!
+  details: String
+  warrantyInformation: String
+}
